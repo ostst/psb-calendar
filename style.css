@@ -116,11 +116,12 @@ body { padding-top: 72px; }
     top: 100%;
     right: 0;
     background: var(--card-bg);
-    min-width: 240px;
+    min-width: 272px;
     box-shadow: var(--shadow-basic);
     border-radius: 16px;
-    padding: 8px 0;
+    padding: 16px;
     flex-direction: column;
+    gap: 0;
     z-index: 600;
 }
 .nav-item:hover .dropdown-menu { display: flex; }
@@ -128,13 +129,14 @@ body { padding-top: 72px; }
 .dropdown-link {
     text-decoration: none;
     color: var(--text-color);
-    padding: 14px 24px;
-    font-size: 15px;
+    padding: 8px 0;
+    font-size: 16px;
     letter-spacing: -0.03em;
-    transition: background 0.15s, color 0.15s;
+    transition: color 0.15s;
     white-space: nowrap;
+    display: block;
 }
-.dropdown-link:hover { background: var(--tag-bg); color: var(--primary-orange-hover); }
+.dropdown-link:hover { color: var(--primary-orange-hover); }
 
 /* Кнопка Войти */
 .btn-login {
