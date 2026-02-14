@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Академия ПСБ - Календарь</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2D3280">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+
+    <!-- ХЕДЕР (идентичен psb-academy.ru) -->
+    <header class="header">
+        <a href="https://psb-academy.ru/" class="logo" title="Академия ПСБ — главная">
+            <img src="img/Logo.png" alt="Академия ПСБ" class="logo-img">
+        </a>
+
+        <!-- Навигация -->
+        <nav class="nav">
+            <div class="nav-item">
+                <div class="nav-link-wrapper">
+                    <span class="nav-text">Программы и курсы</span>
+                    <svg class="nav-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="https://psb-academy.ru/education?categories=4" class="dropdown-link">Гособоронзаказ и ОПК</a>
+                    <a href="https://psb-academy.ru/education?categories=3" class="dropdown-link">Управление проектами</a>
+                    <a href="https://psb-academy.ru/education?categories=1" class="dropdown-link">Финансовая грамотность</a>
+                    <a href="https://psb-academy.ru/education?categories=5" class="dropdown-link">Цифровые навыки</a>
+                </div>
+            </div>
+
+            <div class="nav-item">
+                <div class="nav-link-wrapper">
+                    <span class="nav-text">Проекты</span>
+                    <svg class="nav-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="https://psb-academy.ru/programs/kmb" class="dropdown-link">Курс малого бизнеса</a>
+                    <a href="https://psb-academy.ru/education/319" class="dropdown-link">Игра «Время денег»</a>
+                    <a href="https://psb-academy.ru/education" class="dropdown-link">Звание — предприниматель</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Кнопки справа -->
+        <div class="header-controls">
+            <a href="https://new.psb-academy.ru/education" class="btn-login">Войти</a>
+            <button class="btn-eye" id="btnEye" title="Версия для слабовидящих">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <main class="container">
+        
+        <div class="calendar-header">
+            <h1>Календарь мероприятий</h1>
+            <div class="calendar-controls">
+                <div class="view-toggle" id="viewToggle">
+                    <button class="view-btn active" data-view="grid">Сетка</button>
+                    <button class="view-btn" data-view="list">Список</button>
+                </div>
+                <div class="month-nav">
+                    <button class="btn-month-nav" id="prevMonth">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M15 19L8 12L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="current-month" id="monthDisplay">Июнь 2025</div>
+                    <button class="btn-month-nav" id="nextMonth">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                </div>
+                <button class="btn-today" id="btnToday">Сегодня</button>
+            </div>
+        </div>
+
+        <div class="calendar-subheader">
+            <div class="event-counter" id="eventCounter"></div>
+            <div class="filter-tabs" id="filterTabs"></div>
+        </div>
+
+        <div class="calendar-grid" id="calendarGridContainer">
+            <div class="weekday">Пн</div>
+            <div class="weekday">Вт</div>
+            <div class="weekday">Ср</div>
+            <div class="weekday">Чт</div>
+            <div class="weekday">Пт</div>
+            <div class="weekday">Сб</div>
+            <div class="weekday">Вс</div>
+            <div id="calendarGrid" class="days-container"></div>
+        </div>
+
+        <div class="list-view" id="listView" style="display:none"></div>
+    </main>
+
+    <!-- ФУТЕР (идентичен psb-academy.ru) -->
+    <footer class="footer">
+        <div class="footer-card">
+            <div class="footer-col footer-col-brand">
+                <a href="https://psb-academy.ru/" class="footer-logo">
+                    <img src="img/Logo.png" alt="Академия ПСБ" class="logo-img">
+                </a>
+                <div class="footer-socials">
+                    <a href="https://vk.com/psb_academy" class="soc-icon" target="_blank" rel="noopener" aria-label="ВКонтакте">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2zm3.08 14.27h-1.71c-.65 0-.85-.52-2.01-1.7-1.02-1-1.46-1.13-1.71-1.13-.35 0-.45.1-.45.58v1.55c0 .41-.13.66-1.22.66-1.8 0-3.8-1.09-5.21-3.13C3.74 10.46 3.2 8.47 3.2 8.01c0-.25.1-.48.58-.48h1.71c.43 0 .6.2.76.66.84 2.43 2.25 4.56 2.83 4.56.22 0 .31-.1.31-.66V10.1c-.07-1.13-.66-1.22-.66-1.63 0-.2.17-.41.44-.41h2.69c.37 0 .5.2.5.63v3.01c0 .37.17.5.27.5.22 0 .4-.13.81-.54 1.25-1.4 2.14-3.56 2.14-3.56.12-.25.31-.48.75-.48h1.71c.51 0 .63.27.51.63-.22 1.04-2.36 4.04-2.36 4.04-.19.3-.26.44 0 .78.19.25.81.78 1.22 1.25.76.85 1.34 1.56 1.5 2.06.17.5-.09.76-.56.76z"/></svg>
+                    </a>
+                    <a href="https://t.me/psb_academy" class="soc-icon" target="_blank" rel="noopener" aria-label="Telegram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-col footer-col-links-a">
+                <div class="footer-nav-col">
+                    <a href="https://psb-academy.ru/events" class="footer-link">Вебинары и мероприятия</a>
+                    <a href="https://psb-academy.ru/education" class="footer-link">Программы и курсы</a>
+                    <a href="https://psb-academy.ru/about" class="footer-link">Об Академии</a>
+                </div>
+                <div class="footer-legal-col">
+                    <a href="https://psb-academy.ru/consent" class="footer-legal-link">Согласие на обработку персональных данных</a>
+                    <a href="https://psb-academy.ru/agreement" class="footer-legal-link">Пользовательское соглашение</a>
+                    <a href="https://psb-academy.ru/education-info" class="footer-legal-link">Сведения об образовательной организации</a>
+                </div>
+            </div>
+
+            <div class="footer-col footer-col-links-b">
+                <div class="footer-nav-col">
+                    <a href="https://psb-academy.ru/news" class="footer-link">Новости</a>
+                    <a href="https://psb-academy.ru/blog" class="footer-link">Блог</a>
+                    <a href="https://psb-academy.ru/contacts" class="footer-link">Контакты</a>
+                </div>
+                <div class="footer-legal-col">
+                    <a href="https://psb-academy.ru/privacy" class="footer-legal-link">Политика в отношении обработки персональных данных</a>
+                    <a href="https://psb-academy.ru/education" class="footer-legal-link">Каталог образовательных продуктов</a>
+                </div>
+            </div>
+
+            <div class="footer-col footer-col-feedback">
+                <p class="footer-text">Если остались вопросы, вы можете задать их через форму обратной связи</p>
+                <a href="https://psb-academy.ru/contacts" class="footer-btn">Задать вопрос</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- МОДАЛЬНОЕ ОКНО СОБЫТИЯ (ГОРИЗОНТАЛЬНОЕ) -->
+    <div id="modalBackdrop" class="modal-backdrop"></div>
+    <div id="eventModal" class="modal-box">
+        <div class="modal-body">
+            
+            <!-- ЛЕВАЯ ЧАСТЬ: КАРТИНКА -->
+            <div class="modal-left">
+                <div class="modal-img-container">
+                    <img src="" alt="" id="modalImage">
+                </div>
+            </div>
+
+            <!-- ПРАВАЯ ЧАСТЬ: КОНТЕНТ -->
+            <div class="modal-right">
+                <div class="modal-nav" id="modalNav" style="display:none">
+                    <button type="button" class="modal-nav-btn" id="modalPrev">←</button>
+                    <span id="modalNavText">1 из 2</span>
+                    <button type="button" class="modal-nav-btn" id="modalNext">→</button>
+                </div>
+                <!-- Заголовок и Рейтинг -->
+                <div class="modal-top-row">
+                    <h2 class="modal-title">Название события</h2>
+                    <div class="rating-badge" id="modalRating">4.8</div>
+                </div>
+
+                <!-- Даты (Теги) -->
+                <div class="date-tags" id="dateTagsContainer"></div>
+
+                <!-- Описание -->
+                <p class="modal-desc">Описание мероприятия...</p>
+                
+                <!-- Кнопка внизу -->
+                <a href="#" id="modalLinkBtn" class="btn-modal-action" target="_blank">Записаться</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- МОДАЛЬНОЕ ОКНО ВЕРСИИ ДЛЯ СЛАБОВИДЯЩИХ (идентично psb-academy.ru) -->
+    <div id="accessBackdrop" class="access-backdrop">
+        <div class="access-modal">
+            <button id="closeAccess" class="access-close" aria-label="Закрыть">×</button>
+            
+            <div class="access-section">
+                <h3>Шрифт</h3>
+                <div class="radio-row">
+                    <label class="custom-radio">
+                        <input type="radio" name="font" value="standard" checked>
+                        <span class="checkmark"></span>
+                        <span class="label-text">Стандартный</span>
+                    </label>
+                    <label class="custom-radio">
+                        <input type="radio" name="font" value="special">
+                        <span class="checkmark"></span>
+                        <span class="label-text">Специальный</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="access-section">
+                <h3>Тема сайта</h3>
+                <div class="radio-row">
+                    <label class="custom-radio">
+                        <input type="radio" name="theme" value="standard" checked>
+                        <span class="checkmark"></span>
+                        <span class="label-text">Стандартная</span>
+                    </label>
+                    <label class="custom-radio">
+                        <input type="radio" name="theme" value="dark">
+                        <span class="checkmark"></span>
+                        <span class="label-text">Тёмная</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="access-section">
+                <h3>Масштаб</h3>
+                <p class="access-hint">Для изменения масштаба страницы используйте комбинации клавиш</p>
+                <div class="kbd-row">
+                    <kbd>ctrl</kbd>
+                    <kbd>+</kbd>
+                    <span class="kbd-sep">и</span>
+                    <kbd>ctrl</kbd>
+                    <kbd>-</kbd>
+                </div>
+            </div>
+
+            <button class="btn-reset" id="btnResetAccess">Сбросить настройки</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');</script>
+</body>
+</html>

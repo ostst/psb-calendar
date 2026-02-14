@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель: Календарь</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2D3280">
+    <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <!-- Экран входа -->
+    <div id="loginScreen" class="password-screen">
+        <div class="password-card">
+            <h2>🔒 Вход в админ-панель</h2>
+            <p>Выберите аккаунт и введите пароль</p>
+            <form id="loginForm">
+                <select id="loginRole" required>
+                    <option value="">Выберите аккаунт...</option>
+                    <option value="goz">Гособоронзаказ и ОПК</option>
+                    <option value="finance">Финансовая грамотность</option>
+                    <option value="digital">Цифровые навыки</option>
+                    <option value="other">Остальные направления</option>
+                    <option value="admin">Технический администратор</option>
+                </select>
+                <input type="password" id="loginPassword" placeholder="Пароль" autocomplete="off" required>
+                <button type="submit" class="btn-save">Войти</button>
+            </form>
+            <p class="password-error" id="loginError" style="display:none">Неверный пароль</p>
+            <div class="password-hint">
+                <strong>Пароли:</strong><br>
+                ГОЗ: goz123 · Финансы: finance123<br>
+                Цифровые: digital123 · Остальные: other123<br>
+                Админ: admin
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-container" id="adminContainer" style="display:none">
+        <header class="admin-header">
+            <div class="header-left">
+                <h1>Управление событиями</h1>
+                <span class="role-badge" id="roleBadge"></span>
+            </div>
+            <div class="header-right">
+                <button type="button" class="btn-header-icon" id="btnActivityLog" data-tooltip="Журнал действий">📋</button>
+                <div class="notifications-wrapper" id="notificationsWrapper">
+                    <button type="button" class="btn-header-icon" id="btnNotifications" data-tooltip="Уведомления">
+                        🔔<span class="notif-badge" id="notifBadge" style="display:none">0</span>
+                    </button>
+                    <div class="notifications-dropdown" id="notificationsDropdown" style="display:none">
+                        <div class="notif-header">Уведомления</div>
+                        <div class="notif-list" id="notifList"></div>
+                        <div class="notif-empty" id="notifEmpty">Нет уведомлений</div>
+                    </div>
+                </div>
+                <button type="button" class="btn-header-icon" id="btnChangePassword" data-tooltip="Сменить пароль">🔑</button>
+                <button type="button" class="btn-header-icon" id="btnThemeToggle" data-tooltip="Тёмная тема">🌙</button>
+                <button type="button" class="btn-header-text btn-header-danger" id="btnLogout" title="Выйти">Выйти</button>
+                <a href="index.html" class="btn-header-text">← К календарю</a>
+            </div>
+        </header>
+
+        <div class="admin-content">
+            <!-- ФОРМА (только создание) -->
+            <div class="card form-card">
+                <h2>Создать событие</h2>
+
+                <!-- Кнопки выбора курса и шаблона -->
+                <div class="form-group" style="display:flex;gap:8px;">
+                    <button type="button" class="btn-pick-course" id="btnPickCourse" style="flex:1;">📚 Выбрать курс с сайта</button>
+                    <button type="button" class="btn-pick-template" id="btnPickTemplate">📋 Из шаблона</button>
+                </div>
+                <div class="form-group" style="margin-top:-12px;">
+                    <small>Данные подтянутся автоматически. Можно редактировать.</small>
+                </div>
+
+                <form id="addEventForm">
+                    <div class="form-group">
+                        <label>Категория</label>
+                        <select id="eventCategory" required>
+                            <option value="">Выберите категорию...</option>
+                            <option value="goz">Гособоронзаказ и ОПК</option>
+                            <option value="finance">Финансовая грамотность</option>
+                            <option value="digital">Цифровые навыки</option>
+                            <option value="projects">Управление проектами</option>
+                            <option value="management">Управленческие навыки</option>
+                            <option value="business">Предпринимательство</option>
+                            <option value="personal">Личностный рост</option>
+                            <option value="games">Бизнес-игры</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Дата отображения в календаре</label>
+                        <input type="date" id="eventDate" required>
+                        <small>В этой ячейке календаря появится событие.</small>
+                        <span class="form-hint form-hint-warning" id="duplicateHint" style="display:none"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Название курса</label>
+                        <input type="text" id="eventTitle" placeholder="Например: Курс по нейросетям" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label>Рейтинг (0.0 - 5.0)</label>
+                            <input type="number" id="eventRating" step="0.1" min="0" max="5" placeholder="4.8">
+                        </div>
+                        <div class="form-group half">
+                            <label>Ссылка на курс (Кнопка "Записаться")</label>
+                            <input type="url" id="eventLink" placeholder="https://psb-academy.ru/education/123">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Даты проведения (для тегов в модалке)</label>
+                        <div id="dateTagsWrapper"></div>
+                        <button type="button" id="addDateRowBtn" class="btn-secondary">+ Добавить даты потока</button>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Обложка</label>
+                        <div class="image-source-tabs">
+                            <button type="button" class="tab-btn active" data-tab="file">Загрузить файл</button>
+                            <button type="button" class="tab-btn" data-tab="url">Ссылка на изображение</button>
+                        </div>
+                        <div class="image-input image-file" id="imageFileBlock">
+                            <input type="file" id="eventImageFile" accept="image/*">
+                            <small>Макс. 2 МБ. JPG, PNG, WebP.</small>
+                        </div>
+                        <div class="image-input image-url" id="imageUrlBlock" style="display:none">
+                            <input type="url" id="eventImageUrl" placeholder="https://example.com/image.jpg">
+                        </div>
+                        <div class="image-preview" id="imagePreview" style="display:none">
+                            <img id="previewImg" src="" alt="Превью">
+                            <button type="button" class="btn-remove-preview" id="removePreview">×</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Описание</label>
+                        <textarea id="eventDesc" rows="4" placeholder="Описание курса..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-save">Сохранить событие</button>
+                </form>
+                <button type="button" class="btn-preview" id="btnPreviewCard">👁 Предпросмотр</button>
+            </div>
+
+            <!-- СПИСОК -->
+            <div class="card list-card">
+                <div class="list-header">
+                    <div class="list-title-row">
+                        <h2>Список событий</h2>
+                        <span class="events-counter" id="eventsCounter"></span>
+                    </div>
+                    <div class="list-controls">
+                        <input type="text" id="searchInput" placeholder="Поиск по названию..." class="search-input">
+                        <select id="monthFilter" class="filter-select">
+                            <option value="">Все месяцы</option>
+                            <option value="0">Январь</option>
+                            <option value="1">Февраль</option>
+                            <option value="2">Март</option>
+                            <option value="3">Апрель</option>
+                            <option value="4">Май</option>
+                            <option value="5">Июнь</option>
+                            <option value="6">Июль</option>
+                            <option value="7">Август</option>
+                            <option value="8">Сентябрь</option>
+                            <option value="9">Октябрь</option>
+                            <option value="10">Ноябрь</option>
+                            <option value="11">Декабрь</option>
+                        </select>
+                        <select id="sortSelect" class="filter-select">
+                            <option value="date">По дате</option>
+                            <option value="title">По названию</option>
+                            <option value="rating">По рейтингу</option>
+                        </select>
+                        <div class="export-import">
+                            <button type="button" id="btnExport" class="btn-export">📥 Экспорт</button>
+                            <label class="btn-import">📤 Импорт<input type="file" id="importFile" accept=".json" hidden></label>
+                        </div>
+                    </div>
+                </div>
+                <ul id="eventsList" class="events-list"></ul>
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon">📅</div>
+                    <p>Событий пока нет</p>
+                    <span>Создайте первое событие с помощью формы слева</span>
+                </div>
+                <button id="clearAll" class="btn-danger">Очистить всё</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно редактирования -->
+    <div id="editModalBackdrop" class="modal-backdrop">
+        <div class="modal-edit">
+            <button type="button" class="modal-close" id="editModalClose">×</button>
+            <h2>Редактировать событие</h2>
+            <form id="editEventForm">
+                <input type="hidden" id="editKey" value="">
+                <input type="hidden" id="editIndex" value="">
+                <div class="form-group">
+                    <label>Категория</label>
+                    <select id="editEventCategory" required>
+                        <option value="">Выберите...</option>
+                        <option value="goz">Гособоронзаказ и ОПК</option>
+                        <option value="finance">Финансовая грамотность</option>
+                        <option value="digital">Цифровые навыки</option>
+                        <option value="projects">Управление проектами</option>
+                        <option value="management">Управленческие навыки</option>
+                        <option value="business">Предпринимательство</option>
+                        <option value="personal">Личностный рост</option>
+                        <option value="games">Бизнес-игры</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Дата отображения в календаре</label>
+                    <input type="date" id="editEventDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Название курса</label>
+                    <input type="text" id="editEventTitle" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Рейтинг (0.0 - 5.0)</label>
+                        <input type="number" id="editEventRating" step="0.1" min="0" max="5">
+                    </div>
+                    <div class="form-group half">
+                        <label>Ссылка на курс</label>
+                        <input type="url" id="editEventLink">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Даты проведения</label>
+                    <div id="editDateTagsWrapper"></div>
+                    <button type="button" id="editAddDateRowBtn" class="btn-secondary">+ Добавить даты потока</button>
+                </div>
+                <div class="form-group">
+                    <label>Обложка</label>
+                    <div class="image-source-tabs">
+                        <button type="button" class="edit-tab-btn active" data-tab="file">Файл</button>
+                        <button type="button" class="edit-tab-btn" data-tab="url">Ссылка</button>
+                    </div>
+                    <div class="image-input" id="editImageFileBlock">
+                        <input type="file" id="editEventImageFile" accept="image/*">
+                    </div>
+                    <div class="image-input" id="editImageUrlBlock" style="display:none">
+                        <input type="url" id="editEventImageUrl" placeholder="https://...">
+                    </div>
+                    <div class="image-preview" id="editImagePreview" style="display:none">
+                        <img id="editPreviewImg" src="" alt="">
+                        <button type="button" class="btn-remove-preview" id="editRemovePreview">×</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Описание</label>
+                    <textarea id="editEventDesc" rows="4"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" id="editModalCancel">Отмена</button>
+                    <button type="submit" class="btn-save">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно выбора курса с сайта -->
+    <div id="coursePickerBackdrop" class="modal-backdrop">
+        <div class="modal-edit modal-course-picker">
+            <button type="button" class="modal-close" id="coursePickerClose">×</button>
+            <h2>Выберите курс с сайта</h2>
+            <input type="text" id="courseSearch" placeholder="Поиск по названию..." class="course-search-input">
+            <div class="course-list" id="courseList"></div>
+        </div>
+    </div>
+
+    <!-- Модальное окно журнала действий -->
+    <div id="logModalBackdrop" class="modal-backdrop">
+        <div class="modal-edit modal-log">
+            <button type="button" class="modal-close" id="logModalClose">×</button>
+            <h2>📋 Журнал действий</h2>
+            <div class="log-list" id="logList"></div>
+            <div class="log-empty" id="logEmpty">Журнал пуст</div>
+        </div>
+    </div>
+
+    <!-- Модальное окно предпросмотра -->
+    <div id="previewModalBackdrop" class="modal-backdrop">
+        <div class="modal-edit modal-preview">
+            <button type="button" class="modal-close" id="previewModalClose">×</button>
+            <h2>👁 Предпросмотр карточки</h2>
+            <div class="preview-sections">
+                <div class="preview-section">
+                    <h3>Ячейка календаря</h3>
+                    <div class="preview-cell-demo" id="previewCellDemo"></div>
+                </div>
+                <div class="preview-section">
+                    <h3>Модальное окно</h3>
+                    <div class="preview-modal-demo" id="previewModalDemo"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно выбора шаблона -->
+    <div id="templatePickerBackdrop" class="modal-backdrop">
+        <div class="modal-edit modal-course-picker">
+            <button type="button" class="modal-close" id="templatePickerClose">×</button>
+            <h2>📋 Выберите шаблон</h2>
+            <div class="template-list" id="templateList"></div>
+            <div class="course-empty" id="templateEmpty" style="display:none">Нет сохранённых шаблонов</div>
+        </div>
+    </div>
+
+    <!-- Модальное окно смены пароля -->
+    <div id="passwordModalBackdrop" class="modal-backdrop">
+        <div class="modal-edit modal-password">
+            <button type="button" class="modal-close" id="passwordModalClose">×</button>
+            <h2>🔑 Сменить пароль</h2>
+            <form id="changePasswordForm">
+                <div class="form-group">
+                    <label>Текущий пароль</label>
+                    <input type="password" id="cpCurrentPass" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label>Новый пароль</label>
+                    <input type="password" id="cpNewPass" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label>Подтвердите новый пароль</label>
+                    <input type="password" id="cpConfirmPass" required autocomplete="off">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" id="passwordModalCancel">Отмена</button>
+                    <button type="submit" class="btn-save">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Панель массовых операций -->
+    <div class="bulk-action-bar" id="bulkActionBar" style="display:none">
+        <label class="bulk-select-all"><input type="checkbox" id="bulkSelectAll"> Выбрать все</label>
+        <button type="button" class="btn-bulk-delete" id="bulkDeleteBtn">Удалить выбранные (<span id="bulkCount">0</span>)</button>
+        <button type="button" class="btn-bulk-cancel" id="bulkCancelBtn">Отменить выбор</button>
+    </div>
+
+    <!-- Toast с кнопкой Undo -->
+    <div id="toast" class="toast">
+        <span id="toastText"></span>
+        <button type="button" id="toastUndo" class="toast-undo" style="display:none">Отменить</button>
+    </div>
+
+    <script src="admin.js"></script>
+    <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');</script>
+</body>
+</html>
