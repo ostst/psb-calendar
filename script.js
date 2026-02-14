@@ -720,6 +720,23 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnReset) btnReset.addEventListener('click', resetAccessibility);
     navItems.forEach(item => { item.addEventListener('mouseenter', () => item.classList.add('active')); item.addEventListener('mouseleave', () => item.classList.remove('active')); });
 
+    // === АВТО-СКРЫТИЕ ХЕДЕРА ПРИ СКРОЛЛЕ ===
+    const mainHeader = document.getElementById('mainHeader');
+    let lastScrollY = 0;
+    let headerHidden = false;
+
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY > lastScrollY && currentScrollY > 80 && !headerHidden) {
+            mainHeader.classList.add('header-hidden');
+            headerHidden = true;
+        } else if (currentScrollY < lastScrollY && headerHidden) {
+            mainHeader.classList.remove('header-hidden');
+            headerHidden = false;
+        }
+        lastScrollY = currentScrollY;
+    }, { passive: true });
+
     // === МОБИЛЬНЫЙ СВАЙП ===
     let touchStartX = 0;
     let touchStartY = 0;

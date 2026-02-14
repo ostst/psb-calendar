@@ -25,9 +25,13 @@ body {
 .header { 
     display: flex; align-items: center; justify-content: flex-start; 
     padding: 0 40px; background-color: var(--header-bg); 
-    position: relative; z-index: 500;
+    position: sticky; top: 0; z-index: 500;
     height: 72px;
     border-bottom: 1px solid #E8E8E8;
+    transition: transform 0.3s ease;
+}
+.header.header-hidden {
+    transform: translateY(-100%);
 }
 
 /* Логотип */
@@ -61,6 +65,16 @@ body {
     padding: 12px 20px; font-size: 15px; transition: 0.15s;
 }
 .dropdown-link:hover { background: var(--tag-bg); color: var(--primary-orange); }
+
+/* Одиночная ссылка навигации (без дропдауна) */
+.nav-link-single {
+    font-size: 15px; padding: 10px 0; text-decoration: none;
+    color: var(--text-color); font-weight: 400; transition: color 0.2s;
+}
+.nav-link-single:hover { color: var(--primary-orange); }
+.nav-link-single.nav-link-active {
+    color: var(--primary-orange); font-weight: 500;
+}
 
 /* Кнопки справа */
 .header-controls { display: flex; gap: 16px; align-items: center; }
@@ -469,7 +483,8 @@ body.special-font { font-family: Georgia, 'Times New Roman', serif; font-size: 1
 body.dark-theme { background: #1a1a1a !important; color: #fff !important; }
 body.dark-theme .header { background: #222 !important; border-bottom-color: #444 !important; }
 body.dark-theme .footer-card, body.dark-theme .modal-box, body.dark-theme .day-cell, body.dark-theme .access-modal { background: #222 !important; color: #fff !important; }
-body.dark-theme .footer-link, body.dark-theme .nav-link-wrapper { color: #fff !important; }
+body.dark-theme .footer-link, body.dark-theme .nav-link-wrapper, body.dark-theme .nav-link-single { color: #fff !important; }
+body.dark-theme .nav-link-single.nav-link-active { color: var(--primary-orange) !important; }
 body.dark-theme .date-number, body.dark-theme .modal-title, body.dark-theme .calendar-header h1, body.dark-theme .current-month { color: #fff !important; }
 body.dark-theme .label-text, body.dark-theme .access-section h3, body.dark-theme .access-hint { color: #fff !important; }
 body.dark-theme .btn-reset { background: #333 !important; color: #fff !important; }
