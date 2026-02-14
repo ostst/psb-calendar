@@ -138,28 +138,34 @@ body { padding-top: 72px; }
 }
 .dropdown-link:hover { color: var(--primary-orange-hover); }
 
-/* Кнопка Войти */
+/* Кнопка Войти (точная копия с сайта) */
 .btn-login {
-    background-color: var(--primary-blue);
+    background: var(--primary-blue);
     color: #ffffff;
     border: none;
     padding: 0 15px;
+    min-width: 152px;
     height: 48px;
-    border-radius: 12px;
+    border-radius: 9px;
     cursor: pointer;
     font-size: 18px;
     font-weight: 400;
     letter-spacing: -0.02em;
+    line-height: 1;
     text-decoration: none;
+    text-align: center;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.2s;
+    gap: 6px;
+    transition: all 0.3s ease-in-out;
     white-space: nowrap;
+    user-select: none;
     font-family: 'Golos Text', Golos, sans-serif;
+    box-sizing: border-box;
 }
-.btn-login:hover { background-color: var(--primary-blue-hover); color: white; }
-.btn-login:active { background-color: var(--primary-blue-active); }
+.btn-login:hover { background: var(--primary-blue-hover); color: white; }
+.btn-login:active { background: var(--primary-blue-active); }
 
 /* Кнопка глаза (доступность) */
 .btn-eye {
