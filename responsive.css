@@ -70,31 +70,47 @@
     /* Share button removed */
 
     /* FOOTER MOBILE */
-    .footer { padding: 0 16px 40px; margin-top: 30px; }
+    .footer { padding: 0 18px 20px; margin-top: 30px; }
     .footer-card {
-        padding: 24px 20px;
-        flex-direction: column;
-        gap: 24px;
-        border-radius: 16px;
+        grid-template-columns: minmax(0, 1fr);
+        min-height: 0;
+        border-radius: 12px;
+    }
+    .footer-content {
+        gap: 0;
+        padding: 0;
     }
     .footer-navigations {
-        flex-direction: column;
-        gap: 24px;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 15px;
+        padding: 18px;
+        border-bottom: 1px solid var(--border-light);
     }
+    .footer-navigations .footer-logo { display: none; }
     .footer-bottom {
-        flex-direction: column;
-        gap: 20px;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+    }
+    .footer-socials {
+        order: 2;
+        padding: 18px;
     }
     .footer-legal {
-        flex-direction: column;
-        gap: 16px;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 15px;
+        order: 1;
+        padding: 18px;
+        border-bottom: 1px solid var(--border-light);
     }
     .footer-feedback {
-        min-width: auto;
-        max-width: none;
+        order: 1;
+        gap: 15px;
+        padding: 18px;
+        border-left: none;
+        border-bottom: 1px solid var(--border-light);
     }
     .footer-link { font-size: 16px; }
-    .footer-legal-link { font-size: 12px; }
+    .footer-legal-link { font-size: 14px; }
     .footer-text { font-size: 16px; }
 
     /* Event Modal Mobile */
