@@ -552,6 +552,7 @@ kbd {
 .footer-nav-col {
     display: flex;
     flex-direction: column;
+    gap: 24px;
 }
 
 .footer-link {
