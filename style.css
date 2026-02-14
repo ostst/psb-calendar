@@ -31,32 +31,38 @@ body {
     letter-spacing: -0.03em;
 }
 
-/* ================= HEADER (клон psb-academy.ru) ================= */
+/* ================= HEADER (точный клон psb-academy.ru из реальных CSS) ================= */
 .header {
+    opacity: 1;
+    z-index: 500;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 500;
     background: var(--header-bg);
-    transition: all 0.45s ease-in-out;
+    transition: all .45s ease-in-out 0s;
 }
 .header.header-hidden {
-    transform: translateY(-100%);
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    top: -80px;
 }
 
 .header-inner {
-    max-width: 1280px;
+    width: 100%;
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 0 40px;
-    height: 72px;
-    display: flex;
+    padding: 0 32px;
+    display: grid;
     align-items: center;
-    justify-content: space-between;
+    grid-template-columns: 132px minmax(0, 1fr);
+    gap: 40px;
+    height: 78px;
 }
 
 /* Отступ body для fixed хедера */
-body { padding-top: 72px; }
+body { padding-top: 78px; }
 
 /* Логотип */
 .logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
@@ -66,28 +72,29 @@ body { padding-top: 72px; }
 .header-right-group {
     display: flex;
     align-items: center;
-    gap: 0;
+    justify-content: flex-end;
+    gap: 9px;
 }
 
 /* Навигация */
 .nav {
     display: flex;
-    gap: 0;
+    gap: 18px;
     align-items: center;
-    margin-right: 24px;
+    margin-right: 39px;
 }
 
 .nav-item {
     position: relative;
+    z-index: 500;
 }
 
 .nav-link-wrapper {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 3px;
     font-size: 24px;
     letter-spacing: -0.03em;
-    padding: 20px 16px;
     text-decoration: none;
     color: var(--text-color);
     font-weight: 400;
@@ -98,110 +105,134 @@ body { padding-top: 72px; }
 .nav-item:hover .nav-link-wrapper { color: var(--primary-orange-hover); }
 
 .nav-arrow-icon {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    color: var(--text-color);
-    transition: transform 0.25s, color 0.15s;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease-in-out;
 }
 .nav-arrow-icon svg { width: 24px; height: 24px; }
 .nav-item:hover .nav-arrow-icon {
     transform: rotate(180deg);
-    color: var(--primary-orange);
 }
 
-/* Дропдаун */
+/* Дропдаун (точные стили Dropdown_content + MenuItem_content) */
 .dropdown-menu {
-    display: none;
+    opacity: 0;
+    z-index: 100;
+    visibility: hidden;
     position: absolute;
-    top: 100%;
+    top: 57px;
     right: 0;
+    pointer-events: none;
+    border: 1px solid var(--border-light);
     background: var(--card-bg);
-    min-width: 272px;
     box-shadow: var(--shadow-basic);
-    border-radius: 16px;
-    padding: 16px;
+    border-radius: 9px;
+    transition: all .3s ease-in-out 0s;
+    transform: translateY(20px);
+    padding: 15px;
+    min-width: 272px;
+    display: flex;
     flex-direction: column;
-    gap: 0;
-    z-index: 600;
 }
-.nav-item:hover .dropdown-menu { display: flex; }
+.dropdown-menu::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 36px;
+    bottom: 100%;
+}
+.nav-item:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
 
 .dropdown-link {
-    text-decoration: none;
-    color: var(--text-color);
-    padding: 8px 0;
-    font-size: 16px;
-    letter-spacing: -0.03em;
-    transition: color 0.15s;
-    white-space: nowrap;
-    display: block;
-}
-.dropdown-link:hover { color: var(--primary-orange-hover); }
-
-/* Кнопка Войти (точная копия с сайта) */
-.btn-login {
-    background: var(--primary-blue);
-    color: #ffffff;
-    border: none;
-    padding: 0 15px;
-    min-width: 152px;
-    height: 48px;
-    border-radius: 9px;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1;
-    text-decoration: none;
-    text-align: center;
     display: inline-flex;
     align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--text-color);
+    font-size: 18px;
+    letter-spacing: -0.03em;
+    transition: color 0.15s;
+    margin-top: 15px;
+}
+.dropdown-link:first-child { margin-top: 0; }
+.dropdown-link:hover { color: var(--primary-orange-hover); }
+.dropdown-link:active { color: var(--primary-orange-pressed); }
+
+/* Кнопка Войти (точная копия Button_auto + Button_m + Button_sky) */
+.btn-login {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: center;
     justify-content: center;
-    gap: 6px;
-    transition: all 0.3s ease-in-out;
-    white-space: nowrap;
+    border-radius: 9px;
+    text-align: center;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    cursor: pointer;
     user-select: none;
+    transition: all .3s ease-in-out 0s;
+    background: var(--primary-blue);
+    color: #fff;
+    min-width: 152px;
+    gap: 6px;
+    height: 48px;
+    padding: 0 15px;
+    font-size: 18px;
+    font-weight: 400;
+    text-decoration: none;
+    border: none;
     font-family: 'Golos Text', Golos, sans-serif;
     box-sizing: border-box;
 }
 .btn-login:hover { background: var(--primary-blue-hover); color: white; }
-.btn-login:active { background: var(--primary-blue-active); }
+.btn-login:active { background: var(--primary-blue-pressed); }
 
-/* Кнопка глаза (доступность) */
+/* Кнопка глаза (Button_transparent + Button_m + Button_height) */
 .btn-eye {
-    background: none;
-    border: none;
-    cursor: pointer;
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
     width: 48px;
     height: 48px;
+    border-radius: 9px;
+    cursor: pointer;
+    user-select: none;
+    transition: all .3s ease-in-out 0s;
+    background: none;
+    border: none;
     color: var(--text-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    transition: color 0.15s, background 0.15s;
-    margin-left: 4px;
 }
-.btn-eye:hover { color: var(--primary-orange-hover); background: rgba(0,0,0,0.04); }
+.btn-eye:hover { color: var(--primary-orange-hover); }
+.btn-eye:active { color: var(--primary-orange-pressed); }
 .btn-eye svg { width: 24px; height: 24px; display: block; }
 
-/* Бургер (мобильное меню) */
+/* Бургер (Button_white + Button_m + Button_height) */
 .btn-burger {
-    display: none; /* скрыт на десктопе */
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    cursor: pointer;
-    width: 44px;
-    height: 44px;
-    color: var(--text-color);
-    border-radius: 12px;
+    display: none; /* скрыт на десктопе 1220px+ */
     align-items: center;
     justify-content: center;
-    transition: background 0.15s;
-    margin-left: 8px;
+    width: 48px;
+    height: 48px;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: all .3s ease-in-out 0s;
+    background: var(--card-bg);
+    border: 1px solid var(--border-light);
+    color: var(--text-color);
 }
-.btn-burger:hover { background: rgba(0,0,0,0.04); }
-.btn-burger svg { width: 20px; height: 20px; display: block; }
+.btn-burger:hover { color: var(--primary-orange-hover); }
+.btn-burger svg { width: 24px; height: 24px; display: block; }
 
 /* ================= CALENDAR ================= */
 .container { max-width: 1280px; margin: 40px auto; padding: 0 40px; }
@@ -612,18 +643,17 @@ kbd {
 body.special-font { font-family: Georgia, 'Times New Roman', serif; font-size: 1.1em; }
 body.dark-theme { background: #1a1a1a !important; color: #fff !important; }
 body.dark-theme .header { background: #1a1a1a !important; }
+body.dark-theme .dropdown-menu { background: #222; border-color: #333; }
+body.dark-theme .dropdown-link { color: #e0e0e0; }
+body.dark-theme .dropdown-link:hover { color: var(--primary-orange-hover); }
+body.dark-theme .btn-burger { background: #222; border-color: #333; color: #e0e0e0; }
 body.dark-theme .footer-card, body.dark-theme .modal-box, body.dark-theme .day-cell, body.dark-theme .access-modal { background: #222 !important; color: #fff !important; }
 body.dark-theme .footer-link, body.dark-theme .footer-text, body.dark-theme .nav-link-wrapper { color: #fff !important; }
 body.dark-theme .footer-legal-link { color: #888 !important; }
 body.dark-theme .soc-icon { background: #333; color: #fff; }
 body.dark-theme .soc-icon:hover { background: #444; }
-body.dark-theme .dropdown-menu { background: #222; }
-body.dark-theme .dropdown-link { color: #e0e0e0; }
-body.dark-theme .dropdown-link:hover { background: #333; color: var(--primary-orange); }
 body.dark-theme .btn-eye { color: #999; }
-body.dark-theme .btn-eye:hover { color: #fff; background: #333; }
-body.dark-theme .btn-burger { background: #222; border-color: #444; color: #e0e0e0; }
-body.dark-theme .btn-burger:hover { background: #333; }
+body.dark-theme .btn-eye:hover { color: #fff; }
 body.dark-theme .date-number, body.dark-theme .modal-title, body.dark-theme .calendar-header h1, body.dark-theme .current-month { color: #fff !important; }
 body.dark-theme .label-text, body.dark-theme .access-section h3, body.dark-theme .access-hint { color: #fff !important; }
 body.dark-theme .btn-reset { background: #333 !important; color: #fff !important; }
