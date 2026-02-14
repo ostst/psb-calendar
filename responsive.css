@@ -1,12 +1,15 @@
 /* Мобильная версия (до 768px) */
 @media screen and (max-width: 768px) {
     
+    body { padding-top: 56px; }
     .header-inner { padding: 0 16px; height: 56px; }
     .logo-img { height: 32px; }
     /* Скрываем меню на мобильном, показываем бургер */
     .nav { display: none; }
-    .btn-login { padding: 0 16px; font-size: 14px; height: 36px; }
-    .btn-burger { display: flex; }
+    .btn-login { padding: 0 16px; font-size: 14px; height: 36px; border-radius: 10px; }
+    .btn-eye { width: 36px; height: 36px; }
+    .btn-burger { display: flex; width: 36px; height: 36px; border-radius: 10px; }
+    .container { padding: 0 16px; }
 
     .container { padding: 20px; }
     .calendar-header { flex-direction: column; align-items: flex-start; gap: 10px; }
