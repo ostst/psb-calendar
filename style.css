@@ -21,12 +21,12 @@ body {
     margin: 0; padding: 0;
 }
 
-/* ================= HEADER ================= */
-.header { 
-    display: flex; align-items: center; justify-content: flex-start; 
-    padding: 0 40px; background-color: var(--header-bg); 
-    position: sticky; top: 0; z-index: 500;
-    height: 72px;
+/* ================= HEADER (клон psb-academy.ru) ================= */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 500;
+    background-color: var(--header-bg);
     border-bottom: 1px solid #E8E8E8;
     transition: transform 0.3s ease;
 }
@@ -34,64 +34,142 @@ body {
     transform: translateY(-100%);
 }
 
+.header-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 /* Логотип */
 .logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
 .logo-img { height: 44px; width: auto; display: block; }
 
-/* Навигация */
-.nav { 
-    display: flex; gap: 32px; align-items: center; 
-    margin-left: auto; margin-right: 24px; 
+/* Правая группа: нав + кнопки */
+.header-right-group {
+    display: flex;
+    align-items: center;
+    gap: 24px;
 }
-.nav-item { position: relative; cursor: pointer; }
-.nav-link-wrapper { 
-    display: flex; align-items: center; gap: 6px; font-size: 15px; padding: 10px 0; 
-    text-decoration: none; color: var(--text-color); font-weight: 400;
+
+/* Навигация */
+.nav {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    padding: 24px 0;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 400;
+    cursor: pointer;
+    transition: color 0.15s;
 }
 .nav-link-wrapper:hover { color: var(--primary-orange); }
-.nav-arrow { transition: transform 0.2s; margin-top: 1px; color: var(--text-muted); width: 8px; height: 5px; }
-.nav-item:hover .nav-arrow { transform: rotate(180deg); color: var(--primary-orange); }
 .nav-item:hover .nav-link-wrapper { color: var(--primary-orange); }
 
+.nav-arrow-icon {
+    display: flex;
+    align-items: center;
+    color: var(--text-muted);
+    transition: transform 0.2s, color 0.15s;
+}
+.nav-arrow-icon svg { width: 10px; height: 6px; }
+.nav-item:hover .nav-arrow-icon {
+    transform: rotate(180deg);
+    color: var(--primary-orange);
+}
+
+/* Дропдаун */
 .dropdown-menu {
-    display: none; position: absolute; top: 100%; left: 0;
-    background: var(--card-bg); min-width: 240px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.12); border-radius: 12px;
-    padding: 8px 0; flex-direction: column; z-index: 600;
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--card-bg);
+    min-width: 220px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    border-radius: 12px;
+    padding: 8px 0;
+    flex-direction: column;
+    z-index: 600;
 }
 .nav-item:hover .dropdown-menu { display: flex; }
+
 .dropdown-link {
-    text-decoration: none; color: var(--text-color);
-    padding: 12px 20px; font-size: 15px; transition: 0.15s;
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 12px 20px;
+    font-size: 14px;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
 }
 .dropdown-link:hover { background: var(--tag-bg); color: var(--primary-orange); }
 
-/* Одиночная ссылка навигации (без дропдауна) */
-.nav-link-single {
-    font-size: 15px; padding: 10px 0; text-decoration: none;
-    color: var(--text-color); font-weight: 400; transition: color 0.2s;
-}
-.nav-link-single:hover { color: var(--primary-orange); }
-.nav-link-single.nav-link-active {
-    color: var(--primary-orange); font-weight: 500;
-}
-
-/* Кнопки справа */
-.header-controls { display: flex; gap: 16px; align-items: center; }
-.btn-login { 
-    background-color: var(--primary-blue); color: white; border: none; 
-    padding: 10px 28px; border-radius: 8px; cursor: pointer; 
-    font-size: 15px; font-weight: 500; text-decoration: none; display: inline-flex;
-    align-items: center; justify-content: center; height: 40px;
+/* Кнопка Войти */
+.btn-login {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 0 28px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     transition: opacity 0.2s;
+    white-space: nowrap;
 }
 .btn-login:hover { opacity: 0.85; color: white; }
-.btn-eye { 
-    background: none; border: none; cursor: pointer; padding: 4px; 
-    color: #999; display: flex; align-items: center; justify-content: center;
+
+/* Кнопка глаза (доступность) */
+.btn-eye {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: color 0.15s, background 0.15s;
 }
-.btn-eye:hover { color: var(--text-color); }
+.btn-eye:hover { color: var(--text-color); background: var(--tag-bg); }
 .btn-eye svg { width: 20px; height: 20px; display: block; }
+
+/* Бургер (мобильное меню) */
+.btn-burger {
+    display: none; /* скрыт на десктопе */
+    background: white;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    padding: 8px;
+    color: var(--text-color);
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+}
+.btn-burger:hover { background: var(--tag-bg); }
+.btn-burger svg { width: 20px; height: 20px; display: block; }
 
 /* ================= CALENDAR ================= */
 .container { max-width: 1440px; margin: 40px auto; padding: 0 4%; }
@@ -483,8 +561,14 @@ body.special-font { font-family: Georgia, 'Times New Roman', serif; font-size: 1
 body.dark-theme { background: #1a1a1a !important; color: #fff !important; }
 body.dark-theme .header { background: #222 !important; border-bottom-color: #444 !important; }
 body.dark-theme .footer-card, body.dark-theme .modal-box, body.dark-theme .day-cell, body.dark-theme .access-modal { background: #222 !important; color: #fff !important; }
-body.dark-theme .footer-link, body.dark-theme .nav-link-wrapper, body.dark-theme .nav-link-single { color: #fff !important; }
-body.dark-theme .nav-link-single.nav-link-active { color: var(--primary-orange) !important; }
+body.dark-theme .footer-link, body.dark-theme .nav-link-wrapper { color: #fff !important; }
+body.dark-theme .dropdown-menu { background: #222; }
+body.dark-theme .dropdown-link { color: #e0e0e0; }
+body.dark-theme .dropdown-link:hover { background: #333; color: var(--primary-orange); }
+body.dark-theme .btn-eye { color: #999; }
+body.dark-theme .btn-eye:hover { color: #fff; background: #333; }
+body.dark-theme .btn-burger { background: #222; border-color: #444; color: #e0e0e0; }
+body.dark-theme .btn-burger:hover { background: #333; }
 body.dark-theme .date-number, body.dark-theme .modal-title, body.dark-theme .calendar-header h1, body.dark-theme .current-month { color: #fff !important; }
 body.dark-theme .label-text, body.dark-theme .access-section h3, body.dark-theme .access-hint { color: #fff !important; }
 body.dark-theme .btn-reset { background: #333 !important; color: #fff !important; }

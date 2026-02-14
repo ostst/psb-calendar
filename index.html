@@ -14,48 +14,52 @@
 </head>
 <body>
 
-    <!-- ХЕДЕР (идентичен psb-academy.ru) -->
+    <!-- ХЕДЕР (клон psb-academy.ru) -->
     <header class="header" id="mainHeader">
-        <a href="https://psb-academy.ru/" class="logo" title="Академия ПСБ — главная">
-            <img src="img/Logo.png" alt="Академия ПСБ" class="logo-img">
-        </a>
+        <div class="header-inner">
+            <a href="https://psb-academy.ru/" class="logo" title="Академия ПСБ — главная">
+                <img src="img/Logo.png" alt="Академия ПСБ" class="logo-img">
+            </a>
 
-        <!-- Навигация -->
-        <nav class="nav">
-            <div class="nav-item">
-                <div class="nav-link-wrapper">
-                    <span class="nav-text">Программы и курсы</span>
-                    <svg class="nav-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </div>
-                <div class="dropdown-menu">
-                    <a href="https://psb-academy.ru/education?categories=4" class="dropdown-link">Гособоронзаказ и ОПК</a>
-                    <a href="https://psb-academy.ru/education?categories=3" class="dropdown-link">Управление проектами</a>
-                    <a href="https://psb-academy.ru/education?categories=1" class="dropdown-link">Финансовая грамотность</a>
-                    <a href="https://psb-academy.ru/education?categories=5" class="dropdown-link">Цифровые навыки</a>
-                </div>
+            <div class="header-right-group">
+                <!-- Навигация -->
+                <nav class="nav">
+                    <div class="nav-item">
+                        <a href="https://psb-academy.ru/education" class="nav-link-wrapper">
+                            <span class="nav-text">Программы и курсы</span>
+                            <span class="nav-arrow-icon">
+                                <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="https://psb-academy.ru/programs/calendar" class="dropdown-link" target="_blank">Календарь</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-item">
+                        <a href="https://psb-academy.ru/programs/kmb" class="nav-link-wrapper">
+                            <span class="nav-text">Проекты</span>
+                            <span class="nav-arrow-icon">
+                                <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="https://psb-academy.ru/programs/kmb" class="dropdown-link" target="_blank">Курс малого бизнеса</a>
+                            <a href="https://psb-academy.ru/programs/finance/artofmoneymaking" class="dropdown-link" target="_blank">Игра «Время денег»</a>
+                            <a href="https://psb-academy.ru/svoi/?utm_source=site&utm_medium=menu&utm_campaign=svoi" class="dropdown-link" target="_blank">Звание — предприниматель</a>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Кнопки -->
+                <a href="https://psb-academy.ru/auth?redirect_url=%2Feducation" class="btn-login">Войти</a>
+                <button class="btn-eye" id="btnEye" aria-label="Настройки доступности сайта">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+                <button class="btn-burger" id="btnBurger" aria-label="Меню сайта">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
             </div>
-
-            <a href="#" class="nav-link-single nav-link-active">Календарь</a>
-
-            <div class="nav-item">
-                <div class="nav-link-wrapper">
-                    <span class="nav-text">Проекты</span>
-                    <svg class="nav-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </div>
-                <div class="dropdown-menu">
-                    <a href="https://psb-academy.ru/programs/kmb" class="dropdown-link">Курс малого бизнеса</a>
-                    <a href="https://psb-academy.ru/education/319" class="dropdown-link">Игра «Время денег»</a>
-                    <a href="https://psb-academy.ru/education" class="dropdown-link">Звание — предприниматель</a>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Кнопки справа -->
-        <div class="header-controls">
-            <a href="https://new.psb-academy.ru/education" class="btn-login">Войти</a>
-            <button class="btn-eye" id="btnEye" title="Версия для слабовидящих">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            </button>
         </div>
     </header>
 
