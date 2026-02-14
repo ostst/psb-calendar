@@ -84,10 +84,10 @@ body { padding-top: 72px; }
 .nav-link-wrapper {
     display: flex;
     align-items: center;
-    gap: 4px;
-    font-size: 16px;
+    gap: 6px;
+    font-size: 24px;
     letter-spacing: -0.03em;
-    padding: 24px 16px;
+    padding: 20px 16px;
     text-decoration: none;
     color: var(--text-color);
     font-weight: 400;
