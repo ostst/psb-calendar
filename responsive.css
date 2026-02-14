@@ -73,28 +73,29 @@
     .footer { padding: 0 16px 40px; margin-top: 30px; }
     .footer-card {
         padding: 24px 20px;
-        grid-template-columns: 1fr;
-        gap: 18px;
+        flex-direction: column;
+        gap: 24px;
+        border-radius: 16px;
     }
-    .footer-col { min-height: auto; }
-    .footer-col-links-a,
-    .footer-col-links-b,
-    .footer-col-feedback {
-        border-left: none;
-        padding: 0;
+    .footer-navigations {
+        flex-direction: column;
+        gap: 24px;
     }
-    .footer-col-brand {
-        padding-right: 0;
-        gap: 12px;
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
     }
-    .footer-nav-col {
-        margin-bottom: 12px;
-        gap: 10px;
+    .footer-legal {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .footer-feedback {
+        min-width: auto;
+        max-width: none;
     }
     .footer-link { font-size: 16px; }
     .footer-legal-link { font-size: 12px; }
-    .footer-text { max-width: none; font-size: 15px; }
-    .footer-btn { max-width: none; }
+    .footer-text { font-size: 16px; }
 
     /* Event Modal Mobile */
     .modal-box {
