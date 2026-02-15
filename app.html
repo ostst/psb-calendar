@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Академия ПСБ — Календарь и Админка</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2D3280">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Golos, -apple-system, sans-serif; background: #f5f5f5; min-height: 100vh; }
+        .app-tabs {
+            display: flex;
+            gap: 0;
+            background: #fff;
+            padding: 0 24px;
+            box-shadow: 0 1px 0 rgba(0,0,0,.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .app-tab {
+            padding: 16px 24px;
+            font-size: 18px;
+            font-weight: 500;
+            color: #666;
+            background: none;
+            border: none;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: color .2s, border-color .2s;
+        }
+        .app-tab:hover { color: #2D3280; }
+        .app-tab.active { color: #2D3280; border-bottom-color: #2D3280; }
+        .app-frame {
+            display: none;
+            width: 100%;
+            height: calc(100vh - 53px);
+            border: none;
+            background: #fff;
+        }
+        .app-frame.active { display: block; }
+        .app-frame.only-calendar { height: 100vh; }
+        .app-tabs.hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <div class="app-tabs" id="appTabs">
+        <button type="button" class="app-tab active" data-panel="calendar">Календарь</button>
+        <button type="button" class="app-tab" data-panel="admin">Админка</button>
+    </div>
+    <iframe id="frameCalendar" class="app-frame active" src="index.html" title="Календарь"></iframe>
+    <iframe id="frameAdmin" class="app-frame" title="Админ-панель"></iframe>
+
+    <script>
+        (function() {
+            // Секретный доступ: только при #admin или ?admin=1 в URL
+            const hash = (location.hash || '').toLowerCase();
+            const params = new URLSearchParams(location.search);
+            const isAdminMode = hash === '#admin' || params.get('admin') === '1';
+
+            const tabsWrap = document.getElementById('appTabs');
+            const tabs = document.querySelectorAll('.app-tab');
+            const frameCalendar = document.getElementById('frameCalendar');
+            const frameAdmin = document.getElementById('frameAdmin');
+
+            if (!isAdminMode) {
+                tabsWrap.classList.add('hidden');
+                frameCalendar.classList.add('only-calendar');
+                frameAdmin.style.display = 'none';
+            } else {
+                frameAdmin.src = 'admin.html'; // загружаем админку только для админов
+            }
+
+            function switchTo(panel) {
+                if (!isAdminMode) return;
+                tabs.forEach(t => t.classList.toggle('active', t.dataset.panel === panel));
+                frameCalendar.classList.toggle('active', panel === 'calendar');
+                frameAdmin.classList.toggle('active', panel === 'admin');
+            }
+
+            window.switchToCalendar = function() { switchTo('calendar'); };
+            window.switchToAdmin = function() { switchTo('admin'); };
+
+            tabs.forEach(t => {
+                t.addEventListener('click', () => switchTo(t.dataset.panel));
+            });
+
+            window.addEventListener('message', function(e) {
+                if (e.data === 'switchToCalendar') switchTo('calendar');
+            });
+        })();
+    </script>
+</body>
+</html>

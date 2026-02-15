@@ -348,6 +348,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Обновление данных из localStorage (когда админка сохраняет в другом iframe/вкладке)
+    function refreshFromStorage() {
+        const stored = localStorage.getItem('calendarEvents');
+        if (!stored) return;
+        const raw = JSON.parse(stored);
+        eventsDB = {};
+        for (const k in raw) {
+            eventsDB[k] = Array.isArray(raw[k]) ? raw[k] : [raw[k]];
+        }
+        renderCurrentView();
+    }
+
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'calendarEvents') refreshFromStorage();
+    });
+
     // Начальный рендер
     setView(currentView);
 

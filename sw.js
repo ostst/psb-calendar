@@ -1,6 +1,7 @@
 const CACHE_NAME = 'psb-calendar-v1';
 const URLS_TO_CACHE = [
     'index.html',
+    'app.html',
     'admin.html',
     'style.css',
     'admin.css',

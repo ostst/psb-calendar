@@ -116,6 +116,21 @@ document.addEventListener('DOMContentLoaded', () => {
         updateBulkBar();
     });
 
+    // Кнопка «К календарю»: при встраивании в app.html — переключаем вкладку родителя
+    const btnBackToCalendar = document.querySelector('a[href="index.html"]');
+    if (btnBackToCalendar) {
+        btnBackToCalendar.addEventListener('click', function(e) {
+            if (window.parent !== window) {
+                try {
+                    if (window.parent.switchToCalendar) {
+                        e.preventDefault();
+                        window.parent.switchToCalendar();
+                    }
+                } catch (_) {}
+            }
+        });
+    }
+
     function applyRole() {
         if (!currentRole) return;
         const acc = ACCOUNTS[currentRole];
