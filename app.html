@@ -77,6 +77,9 @@
                 tabs.forEach(t => t.classList.toggle('active', t.dataset.panel === panel));
                 frameCalendar.classList.toggle('active', panel === 'calendar');
                 frameAdmin.classList.toggle('active', panel === 'admin');
+                if (panel === 'calendar') {
+                    try { frameCalendar.contentWindow.postMessage('refreshCalendar', '*'); } catch (_) {}
+                }
             }
 
             window.switchToCalendar = function() { switchTo('calendar'); };

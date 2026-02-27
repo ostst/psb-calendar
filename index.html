@@ -58,6 +58,38 @@
         </div>
     </header>
 
+    <!-- Мобильное меню (бургер) -->
+    <div id="mobileMenu" class="mobile-menu">
+        <div class="mobile-menu-panel">
+            <button type="button" class="mobile-menu-close" id="mobileMenuClose" aria-label="Закрыть">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <nav class="mobile-menu-nav">
+                <div class="mobile-menu-item mobile-menu-dropdown">
+                    <button type="button" class="mobile-menu-link" data-toggle="programs">
+                        <span class="mobile-menu-text">Программы и курсы</span>
+                        <span class="mobile-menu-chevron">▼</span>
+                    </button>
+                    <div class="mobile-menu-sublinks" id="mobilePrograms">
+                        <a href="https://psb-academy.ru/programs/calendar" class="mobile-menu-sublink" target="_blank">Календарь</a>
+                    </div>
+                </div>
+                <div class="mobile-menu-item mobile-menu-dropdown">
+                    <button type="button" class="mobile-menu-link" data-toggle="projects">
+                        <span class="mobile-menu-text">Проекты</span>
+                        <span class="mobile-menu-chevron">▼</span>
+                    </button>
+                    <div class="mobile-menu-sublinks" id="mobileProjects">
+                        <a href="https://psb-academy.ru/programs/kmb" class="mobile-menu-sublink" target="_blank">Курс малого бизнеса</a>
+                        <a href="https://psb-academy.ru/programs/finance/artofmoneymaking" class="mobile-menu-sublink" target="_blank">Игра «Время денег»</a>
+                        <a href="https://psb-academy.ru/svoi/?utm_source=site&utm_medium=menu&utm_campaign=svoi" class="mobile-menu-sublink" target="_blank">Звание — предприниматель</a>
+                    </div>
+                </div>
+            </nav>
+            <a href="https://psb-academy.ru/auth?redirect_url=%2Feducation" class="mobile-menu-login">Войти</a>
+        </div>
+    </div>
+
     <!-- ОСНОВНОЙ КОНТЕНТ -->
     <main class="container">
         
@@ -85,6 +117,10 @@
             <div class="event-counter" id="eventCounter"></div>
             <div class="filter-tabs" id="filterTabs"></div>
         </div>
+
+        <div class="mobile-dates-row" id="mobileDatesRow"></div>
+
+        <div class="mobile-no-events" id="mobileNoEvents">Нет мероприятий в этом месяце</div>
 
         <div class="calendar-grid" id="calendarGridContainer">
             <div class="weekday">Пн</div>

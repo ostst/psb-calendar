@@ -83,6 +83,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const monthNamesGenitive = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
 
     // === ДАННЫЕ ===
+    const defaultImage = "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1000&auto=format&fit=crop";
+    const DEFAULT_EVENTS = {
+        "1-1-2026": [{"title": "Модуль \"Социальный контракт\"", "description": "Модуль программы Академии ПСБ по теме социального контракта. Подробнее на сайте.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "1 января 2026", "line2": "30 июня 2026"}], "category": "management", "image": defaultImage}, {"title": "Модуль \"Искусственный интеллект\"", "description": "Модуль программы Академии ПСБ по искусственному интеллекту и нейросетям. Подробнее на сайте.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "1 января 2026", "line2": "30 июня 2026"}], "category": "digital", "image": defaultImage}],
+        "1-10-2026": [{"title": "ДПП ПК \"Банковское дело\"", "description": "Программа повышения квалификации по банковскому делу для специалистов финансовой сферы. Подробнее на сайте Академии ПСБ.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "1 октября 2026", "line2": "23 октября 2026"}], "category": "management", "image": defaultImage}, {"title": "Онлайн-тренинги для участников программы", "description": "Онлайн-тренинги для участников программ Академии ПСБ. Подробнее на сайте.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "1 октября 2026", "line2": "1 октября 2026"}], "category": "management", "image": defaultImage}, {"title": "Офлайн конференция", "description": "Офлайн-мероприятие Академии ПСБ для обмена опытом и развития профессиональных навыков. Подробнее на сайте.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "1 октября 2026", "line2": "1 октября 2026"}], "category": "management", "image": defaultImage}, {"title": "Онлайн-курс по проектам", "description": "Программа по управлению командой и коммуникациями проекта. Подробнее на сайте Академии ПСБ.", "rating": "4.8", "link": "https://psb-academy.ru/education/161", "dateTags": [{"line1": "1 октября 2026", "line2": "1 октября 2026"}], "category": "projects", "image": defaultImage}, {"title": "ДПП ПК \"Диверсификация деятельности ОПК\"", "description": "Программа предназначена для обучения сотрудников, задействованных в гособоронзаказе (ГОЗ) и охватывает все аспекты от нормативного регулирования до финансового сопровождения.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "1 октября 2026", "line2": "1 октября 2026"}], "category": "goz", "image": defaultImage}, {"title": "Онлайн-курс \"Ответственность в сфере ГОЗ\"", "description": "Программа предназначена для обучения сотрудников, задействованных в гособоронзаказе (ГОЗ) и охватывает все аспекты от нормативного регулирования до финансового сопровождения.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "1 октября 2026", "line2": "1 октября 2026"}], "category": "goz", "image": defaultImage}, {"title": "Семинар по ГОЗ для клиентов Банка в Нижнем Новгороде", "description": "Программа предназначена для обучения сотрудников, задействованных в гособоронзаказе (ГОЗ) и охватывает все аспекты от нормативного регулирования до финансового сопровождения.", "rating": "4.8", "link": "https://psb-academy.ru/education/241", "dateTags": [{"line1": "1 октября 2026", "line2": "1 октября 2026"}], "category": "goz", "image": defaultImage}],
+        "1-4-2026": [{"title": "ДПП ПК \"Диверсификация деятельности ОПК\"", "description": "Программа предназначена для обучения сотрудников, задействованных в гособоронзаказе (ГОЗ) и охватывает все аспекты от нормативного регулирования до финансового сопровождения.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "1 апреля 2026", "line2": "1 апреля 2026"}], "category": "goz", "image": defaultImage}, {"title": "Онлайн-курс \"Ответственность в сфере ГОЗ\"", "description": "Программа предназначена для обучения сотрудников, задействованных в гособоронзаказе (ГОЗ) и охватывает все аспекты от нормативного регулирования до финансового сопровождения.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "1 апреля 2026", "line2": "1 апреля 2026"}], "category": "goz", "image": defaultImage}, {"title": "Семинар по ГОЗ для клиентов Банка в Уфе", "description": "Программа предназначена для обучения сотрудников, задействованных в гособоронзаказе (ГОЗ) и охватывает все аспекты от нормативного регулирования до финансового сопровождения.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "1 апреля 2026", "line2": "1 апреля 2026"}], "category": "goz", "image": defaultImage}, {"title": "Предварительно: «Гособоронзаказ для новичков»", "description": "Программа предназначена для обучения сотрудников, задействованных в гособоронзаказе (ГОЗ) и охватывает все аспекты от нормативного регулирования до финансового сопровождения, включая ценообразование, расчетно-калькуляционные материалы (РКМ) и отчетность.", "rating": "4.8", "link": "https://psb-academy.ru/education/241", "dateTags": [{"line1": "1 апреля 2026", "line2": "1 апреля 2026"}], "category": "goz", "image": defaultImage}, {"title": "Предварительно: Деловая игра «Гособоронзаказ»", "description": "Программа предназначена для обучения сотрудников, задействованных в гособоронзаказе (ГОЗ) и охватывает все аспекты от нормативного регулирования до финансового сопровождения, включая ценообразование, расчетно-калькуляционные материалы (РКМ) и отчетность.", "rating": "4.8", "link": "https://psb-academy.ru/education/241", "dateTags": [{"line1": "1 апреля 2026", "line2": "1 апреля 2026"}], "category": "goz", "image": defaultImage}],
+        "1-7-2026": [{"title": "ДПП ПК \"Продвинутый SQL для анализа данных\"", "description": "Программа предназначена для расширения навыков и знаний о типичных представителях SQL СУБД, динамическом SQL и NoSQL, и проведения исследовательского анализа данных для расчёта бизнес-метрик.", "rating": "4.8", "link": "https://psb-academy.ru/education/92", "dateTags": [{"line1": "1 июля 2026", "line2": "27 августа 2026"}], "category": "digital", "image": defaultImage}, {"title": "Онлайн-тренинги для участников программы", "description": "Онлайн-тренинги для участников программ Академии ПСБ. Подробнее на сайте.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "1 июля 2026", "line2": "1 июля 2026"}], "category": "management", "image": defaultImage}, {"title": "ДПП ПК \"Нейросети для работы и жизни\"", "description": "Программа обучает эффективному использованию нейросетей для автоматизации и решения задач — от обработки данных до создания контента.", "rating": "4.8", "link": "https://psb-academy.ru/education/343", "dateTags": [{"line1": "1 июля 2026", "line2": "1 июля 2026"}], "category": "digital", "image": defaultImage}, {"title": "Дистанционный курс: Основы предпринимательской деятельности", "description": "Учитесь у практиков и совершайте первые шаги на пути к своему делу. Уроки в записи, онлайн-встречи с командой, разборы от экспертов в прямом эфире.", "rating": "4.8", "link": "https://psb-academy.ru/programs/kmb", "dateTags": [{"line1": "1 июля 2026", "line2": "1 июля 2026"}], "category": "management", "image": defaultImage}, {"title": "Семинар по ГОЗ для клиентов Банка в Туле", "description": "Программа предназначена для обучения сотрудников, задействованных в гособоронзаказе (ГОЗ) и охватывает все аспекты от нормативного регулирования до финансового сопровождения.", "rating": "4.8", "link": "https://psb-academy.ru/education/241", "dateTags": [{"line1": "1 июля 2026", "line2": "1 июля 2026"}], "category": "goz", "image": defaultImage}],
+        "1-9-2026": [{"title": "Тренинги и игры из каталога Академии", "description": "Тренинги и деловые игры из каталога программ Академии ПСБ. Подробнее на сайте.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "1 сентября 2026", "line2": "1 сентября 2026"}], "category": "management", "image": defaultImage}, {"title": "Семинар по ГОЗ для клиентов Банка в Ростове-на-Дону", "description": "Программа предназначена для обучения сотрудников, задействованных в гособоронзаказе (ГОЗ) и охватывает все аспекты от нормативного регулирования до финансового сопровождения.", "rating": "4.8", "link": "https://psb-academy.ru/education/241", "dateTags": [{"line1": "1 сентября 2026", "line2": "1 сентября 2026"}], "category": "goz", "image": defaultImage}],
+        "2-4-2026": [{"title": "Офлайн конференция для руководителей с трансляцией онлайн", "description": "Конференция для руководителей с возможностью онлайн-участия. Подробнее на сайте Академии ПСБ.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "2 апреля 2026", "line2": "2 апреля 2026"}], "category": "management", "image": defaultImage}],
+        "2-3-2026": [{"title": "ДПП ПК \"Базовый SQL для анализа данных\"", "description": "Программа предлагает погрузиться в основы SQL и его применение в анализе данных, а также получить необходимые навыки для работы с базами данных.", "rating": "4.8", "link": "https://psb-academy.ru/education/94", "dateTags": [{"line1": "2 марта 2026", "line2": "4 мая 2026"}], "category": "digital", "image": defaultImage}],
+        "3-2-2026": [{"title": "Семинар по ГОЗ для клиентов Банка в Екатеринбурге", "description": "Программа предназначена для обучения сотрудников, задействованных в гособоронзаказе (ГОЗ) и охватывает все аспекты от нормативного регулирования до финансового сопровождения.", "rating": "4.8", "link": "https://psb-academy.ru/education/241", "dateTags": [{"line1": "3 февраля 2026", "line2": "3 февраля 2026"}], "category": "goz", "image": defaultImage}],
+        "4-3-2026": [{"title": "Игра \"Время денег\" в Ярославле", "description": "Финансово-деловая игра от ПСБ и Академии ПСБ, призванная повысить финансовую грамотность сотрудников, обучить их эффективным стратегиям роста финансов. В ходе игры участники принимают различные финансовые решения, влияющие на дальнейшее прохождение.", "rating": "4.8", "link": "https://psb-academy.ru/programs/finance/artofmoneymaking", "dateTags": [{"line1": "4 марта 2026", "line2": "4 марта 2026"}], "category": "finance", "image": defaultImage}],
+        "4-5-2026": [{"title": "ДПП ПК \"Анализ данных для начинающих\"", "description": "Программа предназначена для изучения методов моделирования процессов, способов визуализации данных и проведения тестирований. Подходит для специалистов, желающих систематизировать знания в области анализа и проектирования.", "rating": "4.8", "link": "https://psb-academy.ru/education/262", "dateTags": [{"line1": "4 мая 2026", "line2": "5 июня 2026"}], "category": "digital", "image": defaultImage}],
+        "5-9-2026": [{"title": "Коммерческий поток КМБ", "description": "Учитесь у практиков и совершайте первые шаги на пути к своему делу. Уроки в записи, онлайн-встречи с командой, разборы от экспертов в прямом эфире. 14 экспертов-практиков, 18 онлайн-встреч, 3 месяца обучения. Проработка учебного бизнес-проекта от идеи до защиты проекта.", "rating": "4.8", "link": "https://psb-academy.ru/programs/kmb", "dateTags": [{"line1": "5 сентября 2026", "line2": "28 ноября 2026"}], "category": "management", "image": defaultImage}, {"title": "Проведение осеннего потока КМБ 2026", "description": "Учитесь у практиков и совершайте первые шаги на пути к своему делу. Уроки в записи, онлайн-встречи с командой, разборы от экспертов в прямом эфире. 14 экспертов-практиков, 18 онлайн-встреч, 3 месяца обучения. Проработка учебного бизнес-проекта от идеи до защиты проекта.", "rating": "4.8", "link": "https://psb-academy.ru/programs/kmb", "dateTags": [{"line1": "5 сентября 2026", "line2": "28 ноября 2026"}], "category": "management", "image": defaultImage}],
+        "5-10-2026": [{"title": "ДПП ПК \"Промт-инженер: работа с нейросетями\"", "description": "Программа обучает эффективному использованию нейросетей для автоматизации и решения задач — от обработки данных до создания контента (изображения, аудио, видео, презентации).", "rating": "4.8", "link": "https://psb-academy.ru/education/343", "dateTags": [{"line1": "5 октября 2026", "line2": "4 декабря 2026"}], "category": "digital", "image": defaultImage}],
+        "6-4-2026": [{"title": "ДПП ПК \"Продвинутый SQL для анализа данных\"", "description": "Программа предназначена для расширения навыков и знаний о типичных представителях SQL СУБД, динамическом SQL и NoSQL, и проведения исследовательского анализа данных для расчёта бизнес-метрик.", "rating": "4.8", "link": "https://psb-academy.ru/education/92", "dateTags": [{"line1": "6 апреля 2026", "line2": "4 июня 2026"}], "category": "digital", "image": defaultImage}, {"title": "Интенсив: Нейросети в маркетинге", "description": "Программа обучает эффективному использованию нейросетей для автоматизации и решения задач — от обработки данных до создания контента.", "rating": "4.8", "link": "https://psb-academy.ru/education/343", "dateTags": [{"line1": "6 апреля 2026", "line2": "10 апреля 2026"}], "category": "digital", "image": defaultImage}],
+        "6-7-2026": [{"title": "ДПП ПК \"Закупки в сфере ОПК\"", "description": "Программа предназначена для совершенствования навыков и знаний в области закупок товаров, работ и услуг по государственному оборонному заказу, с акцентом на правовом регулировании и процедурах закупок.", "rating": "4.8", "link": "https://psb-academy.ru/education/206", "dateTags": [{"line1": "6 июля 2026", "line2": "6 августа 2026"}], "category": "goz", "image": defaultImage}],
+        "7-9-2026": [{"title": "ДПП ПК \"Нейросети для работы и жизни\"", "description": "Программа обучает эффективному использованию нейросетей для автоматизации и решения задач — от обработки данных до создания контента.", "rating": "4.8", "link": "https://psb-academy.ru/education/343", "dateTags": [{"line1": "7 сентября 2026", "line2": "12 октября 2026"}], "category": "digital", "image": defaultImage}, {"title": "Тренинг \"Развитие стрессоустойчивости\" в Луганске", "description": "Тренинг даст вам инструменты и навыки, необходимые для того, чтобы справиться со стрессом, повысить качество своей жизни и достижения поставленных целей.", "rating": "4.8", "link": "https://psb-academy.ru/education/309", "dateTags": [{"line1": "7 сентября 2026", "line2": "11 сентября 2026"}], "category": "personal", "image": defaultImage}],
+        "8-4-2026": [{"title": "Тренинг \"Развитие стрессоустойчивости\" в Чебоксарах", "description": "Тренинг даст вам инструменты и навыки, необходимые для того, чтобы справиться со стрессом, повысить качество своей жизни и достижения поставленных целей.", "rating": "4.8", "link": "https://psb-academy.ru/education/309", "dateTags": [{"line1": "8 апреля 2026", "line2": "8 апреля 2026"}], "category": "personal", "image": defaultImage}],
+        "8-9-2026": [{"title": "ДПП ПК \"Гособоронзаказ.Эксперты\"", "description": "Программа предназначена для обучения сотрудников, задействованных в гособоронзаказе (ГОЗ) и охватывает все аспекты от нормативного регулирования до финансового сопровождения, включая ценообразование, расчетно-калькуляционные материалы (РКМ) и отчетность.", "rating": "4.9", "link": "https://psb-academy.ru/education/241", "dateTags": [{"line1": "8 сентября 2026", "line2": "18 сентября 2026"}], "category": "goz", "image": defaultImage}],
+        "9-4-2026": [{"title": "Тренинг \"Критическое мышление\" в Йошкар-Оле", "description": "Дистанционный курс предлагает инструменты для развития нестандартного подхода в любой сфере.", "rating": "4.8", "link": "https://psb-academy.ru/education/160", "dateTags": [{"line1": "9 апреля 2026", "line2": "10 апреля 2026"}], "category": "personal", "image": defaultImage}],
+        "10-3-2026": [{"title": "ДПП ПК \"Гособоронзаказ.Эксперты\"", "description": "Программа предназначена для обучения сотрудников, задействованных в гособоронзаказе (ГОЗ) и охватывает все аспекты от нормативного регулирования до финансового сопровождения, включая ценообразование, расчетно-калькуляционные материалы (РКМ) и отчетность.", "rating": "4.9", "link": "https://psb-academy.ru/education/241", "dateTags": [{"line1": "10 марта 2026", "line2": "20 марта 2026"}], "category": "goz", "image": defaultImage}],
+        "10-7-2026": [{"title": "ДПП ПК \"Системный анализ для начинающих\"", "description": "Комплексная программа для начинающих аналитиков данных и системных аналитиков. Охватывает требования к ПО, управление рисками, жизненный цикл продукта, тестирование и моделирование данных.", "rating": "4.8", "link": "https://psb-academy.ru/education/91", "dateTags": [{"line1": "10 июля 2026", "line2": "4 сентября 2026"}], "category": "digital", "image": defaultImage}],
+        "13-4-2026": [{"title": "Мини-курс: Цифровая бухгалтерия с ИИ", "description": "Программа по применению искусственного интеллекта в бухгалтерском учёте. Подробнее на сайте Академии ПСБ.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "13 апреля 2026", "line2": "17 апреля 2026"}], "category": "digital", "image": defaultImage}],
+        "13-7-2026": [{"title": "ДПП ПК \"Промт-инженер: работа с нейросетями\"", "description": "Программа обучает эффективному использованию нейросетей для автоматизации и решения задач — от обработки данных до создания контента (изображения, аудио, видео, презентации).", "rating": "4.8", "link": "https://psb-academy.ru/education/343", "dateTags": [{"line1": "13 июля 2026", "line2": "11 сентября 2026"}], "category": "digital", "image": defaultImage}],
+        "16-3-2026": [{"title": "Тренинг \"Как говорить нет и почему это важно\" в Луганске", "description": "Тренинг по развитию навыков коммуникации и умения отказывать. Подробнее на сайте Академии ПСБ.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "16 марта 2026", "line2": "20 марта 2026"}], "category": "management", "image": defaultImage}],
+        "16-4-2026": [{"title": "ДПП ПК \"Государственные контракты. Заключение. Исполнение\"", "description": "Программа обучает комплексным навыкам работы с государственными контрактами на всех этапах, от составления до прекращения.", "rating": "4.8", "link": "https://psb-academy.ru/education/207", "dateTags": [{"line1": "16 апреля 2026", "line2": "17 апреля 2026"}], "category": "goz", "image": defaultImage}],
+        "16-6-2026": [{"title": "ДПП ПК \"Гособоронзаказ.Эксперты\"", "description": "Программа предназначена для обучения сотрудников, задействованных в гособоронзаказе (ГОЗ) и охватывает все аспекты от нормативного регулирования до финансового сопровождения, включая ценообразование, расчетно-калькуляционные материалы (РКМ) и отчетность.", "rating": "4.9", "link": "https://psb-academy.ru/education/241", "dateTags": [{"line1": "16 июня 2026", "line2": "26 июня 2026"}], "category": "goz", "image": defaultImage}],
+        "16-7-2026": [{"title": "ДПП ПК \"Базовый SQL для анализа данных\"", "description": "Программа предлагает погрузиться в основы SQL и его применение в анализе данных, а также получить необходимые навыки для работы с базами данных.", "rating": "4.8", "link": "https://psb-academy.ru/education/94", "dateTags": [{"line1": "16 июля 2026", "line2": "9 сентября 2026"}], "category": "digital", "image": defaultImage}],
+        "17-11-2026": [{"title": "ДПП ПК \"Гособоронзаказ.Эксперты\"", "description": "Программа предназначена для обучения сотрудников, задействованных в гособоронзаказе (ГОЗ) и охватывает все аспекты от нормативного регулирования до финансового сопровождения, включая ценообразование, расчетно-калькуляционные материалы (РКМ) и отчетность.", "rating": "4.9", "link": "https://psb-academy.ru/education/241", "dateTags": [{"line1": "17 ноября 2026", "line2": "27 ноября 2026"}], "category": "goz", "image": defaultImage}],
+        "17-3-2026": [{"title": "Тренинг \"Теория поколений\" в Донецке", "description": "Программа о различиях поколений и эффективном взаимодействии в команде. Подробнее на сайте Академии ПСБ.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "17 марта 2026", "line2": "17 марта 2026"}], "category": "management", "image": defaultImage}],
+        "18-5-2026": [{"title": "Интенсив «Инвестиции с нуля»", "description": "Дистанционный курс идеален для любого, кто стремится улучшить свое финансовое положение и ищет способы увеличения личных доходов и накоплений.", "rating": "4.8", "link": "https://psb-academy.ru/education/168", "dateTags": [{"line1": "18 мая 2026", "line2": "26 мая 2026"}], "category": "finance", "image": defaultImage}],
+        "19-3-2026": [{"title": "Игра \"Время денег\" в Петрозаводске", "description": "Финансово-деловая игра от ПСБ и Академии ПСБ, призванная повысить финансовую грамотность сотрудников, обучить их эффективным стратегиям роста финансов. В ходе игры участники принимают различные финансовые решения, влияющие на дальнейшее прохождение.", "rating": "4.8", "link": "https://psb-academy.ru/programs/finance/artofmoneymaking", "dateTags": [{"line1": "19 марта 2026", "line2": "19 марта 2026"}], "category": "finance", "image": defaultImage}, {"title": "Тренинг \"Критическое мышление\" в Санкт-Петербурге", "description": "Дистанционный курс предлагает инструменты для развития нестандартного подхода в любой сфере.", "rating": "4.8", "link": "https://psb-academy.ru/education/160", "dateTags": [{"line1": "19 марта 2026", "line2": "20 марта 2026"}], "category": "personal", "image": defaultImage}],
+        "20-4-2026": [{"title": "ДПП ПК \"Банковское дело\"", "description": "Программа повышения квалификации по банковскому делу для специалистов финансовой сферы. Подробнее на сайте Академии ПСБ.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "20 апреля 2026", "line2": "13 мая 2026"}], "category": "management", "image": defaultImage}, {"title": "ДПП ПК \"Основы хранилищ данных\"", "description": "Программа предлагает углубленное понимание подходов к проектированию хранилищ данных и инструментов управления данными, а также помогает разобраться в сути хранилищ данных, их целях и способности решать различные задачи.", "rating": "4.8", "link": "https://psb-academy.ru/education/93", "dateTags": [{"line1": "20 апреля 2026", "line2": "22 июня 2026"}], "category": "digital", "image": defaultImage}, {"title": "ДПП ПК \"Нейросети для работы и жизни\"", "description": "Программа обучает эффективному использованию нейросетей для автоматизации и решения задач — от обработки данных до создания контента.", "rating": "4.8", "link": "https://psb-academy.ru/education/343", "dateTags": [{"line1": "20 апреля 2026", "line2": "22 июня 2026"}], "category": "digital", "image": defaultImage}],
+        "20-7-2026": [{"title": "ДПП ПК \"Банковское дело\"", "description": "Программа повышения квалификации по банковскому делу для специалистов финансовой сферы. Подробнее на сайте Академии ПСБ.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "20 июля 2026", "line2": "10 августа 2026"}], "category": "management", "image": defaultImage}],
+        "22-9-2026": [{"title": "Тренинг \"Управление изменениями\" в Волгограде", "description": "Программа по управлению организационными изменениями. Подробнее на сайте Академии ПСБ.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "22 сентября 2026", "line2": "22 сентября 2026"}], "category": "management", "image": defaultImage}],
+        "23-3-2026": [{"title": "ДПП ПК \"Промт-инженер: работа с нейросетями\"", "description": "Программа обучает эффективному использованию нейросетей для автоматизации и решения задач — от обработки данных до создания контента (изображения, аудио, видео, презентации).", "rating": "4.8", "link": "https://psb-academy.ru/education/343", "dateTags": [{"line1": "23 марта 2026", "line2": "26 мая 2026"}], "category": "digital", "image": defaultImage}, {"title": "ДПП ПК \"Системный анализ для начинающих\"", "description": "Комплексная программа для начинающих аналитиков данных и системных аналитиков. Охватывает требования к ПО, управление рисками, жизненный цикл продукта, тестирование и моделирование данных.", "rating": "4.8", "link": "https://psb-academy.ru/education/91", "dateTags": [{"line1": "23 марта 2026", "line2": "18 мая 2026"}], "category": "digital", "image": defaultImage}],
+        "24-7-2026": [{"title": "ДПП ПК \"Основы хранилищ данных\"", "description": "Программа предлагает углубленное понимание подходов к проектированию хранилищ данных и инструментов управления данными, а также помогает разобраться в сути хранилищ данных, их целях и способности решать различные задачи.", "rating": "4.8", "link": "https://psb-academy.ru/education/93", "dateTags": [{"line1": "24 июля 2026", "line2": "24 сентября 2026"}], "category": "digital", "image": defaultImage}],
+        "25-2-2026": [{"title": "Игра \"Время денег\" в Твери", "description": "Финансово-деловая игра от ПСБ и Академии ПСБ, призванная повысить финансовую грамотность сотрудников, обучить их эффективным стратегиям роста финансов. В ходе игры участники принимают различные финансовые решения, влияющие на дальнейшее прохождение.", "rating": "4.8", "link": "https://psb-academy.ru/programs/finance/artofmoneymaking", "dateTags": [{"line1": "25 февраля 2026", "line2": "25 февраля 2026"}], "category": "finance", "image": defaultImage}],
+        "26-3-2026": [{"title": "Вебинар \"Расчетно-калькуляционные материалы\"", "description": "Программа предназначена для обучения сотрудников, задействованных в гособоронзаказе (ГОЗ) и охватывает все аспекты от нормативного регулирования до финансового сопровождения, включая ценообразование, расчетно-калькуляционные материалы (РКМ) и отчетность.", "rating": "4.8", "link": "https://psb-academy.ru/education/241", "dateTags": [{"line1": "26 марта 2026", "line2": "27 марта 2026"}], "category": "goz", "image": defaultImage}, {"title": "Вебинар \"Инвестиции для начинающих\"", "description": "Дистанционный курс идеален для любого, кто стремится улучшить свое финансовое положение: от тех, кто хочет эффективно управлять семейным бюджетом до тех, кто ищет способы увеличения личных доходов и накоплений.", "rating": "4.8", "link": "https://psb-academy.ru/education/168", "dateTags": [{"line1": "26 марта 2026", "line2": "26 марта 2026"}], "category": "finance", "image": defaultImage}, {"title": "Вебинар: ИИ Маркетинг", "description": "Дистанционный курс познакомит с методиками и моделями исследований, принципами упаковки продукта. Освоите методы количественных и качественных исследований для создания успешных продуктов.", "rating": "4.8", "link": "https://psb-academy.ru/education/164", "dateTags": [{"line1": "26 марта 2026", "line2": "26 марта 2026"}], "category": "projects", "image": defaultImage}],
+        "26-8-2026": [{"title": "ДПП ПК \"Контроль в сфере ГОЗ\"", "description": "Программа нацелена на формирование глубокого понимания ответственности и развитие навыков взаимодействия с контролирующими органами среди работников, задействованных в выполнении государственного оборонного заказа (ГОЗ).", "rating": "4.8", "link": "https://psb-academy.ru/education/204", "dateTags": [{"line1": "26 августа 2026", "line2": "28 августа 2026"}], "category": "goz", "image": defaultImage}],
+        "27-1-2026": [{"title": "ДПП ПК \"Промт-инженер: работа с нейросетями\"", "description": "Программа обучает эффективному использованию нейросетей для автоматизации и решения задач — от обработки данных до создания контента (изображения, аудио, видео, презентации).", "rating": "4.8", "link": "https://psb-academy.ru/education/343", "dateTags": [{"line1": "27 января 2026", "line2": "31 марта 2026"}], "category": "digital", "image": defaultImage}],
+        "27-3-2026": [{"title": "Игра \"Время денег\" в Иваново", "description": "Финансово-деловая игра от ПСБ и Академии ПСБ, призванная повысить финансовую грамотность сотрудников, обучить их эффективным стратегиям роста финансов. В ходе игры участники принимают различные финансовые решения, влияющие на дальнейшее прохождение.", "rating": "4.8", "link": "https://psb-academy.ru/programs/finance/artofmoneymaking", "dateTags": [{"line1": "27 марта 2026", "line2": "27 марта 2026"}], "category": "finance", "image": defaultImage}],
+        "28-9-2026": [{"title": "ДПП ПК \"Продвинутый SQL для анализа данных\"", "description": "Программа предназначена для расширения навыков и знаний о типичных представителях SQL СУБД, динамическом SQL и NoSQL, и проведения исследовательского анализа данных для расчёта бизнес-метрик.", "rating": "4.8", "link": "https://psb-academy.ru/education/92", "dateTags": [{"line1": "28 сентября 2026", "line2": "16 ноября 2026"}], "category": "digital", "image": defaultImage}],
+        "30-1-2026": [{"title": "Игра \"Время денег\" в Химках", "description": "Финансово-деловая игра от ПСБ и Академии ПСБ, призванная повысить финансовую грамотность сотрудников, обучить их эффективным стратегиям роста финансов. В ходе игры участники принимают различные финансовые решения, влияющие на дальнейшее прохождение.", "rating": "4.8", "link": "https://psb-academy.ru/programs/finance/artofmoneymaking", "dateTags": [{"line1": "30 января 2026", "line2": "30 января 2026"}], "category": "finance", "image": defaultImage}],
+        "30-9-2026": [{"title": "Тренинг \"Развитие стрессоустойчивости\" в Донецке", "description": "Тренинг даст вам инструменты и навыки, необходимые для того, чтобы справиться со стрессом, повысить качество своей жизни и достижения поставленных целей.", "rating": "4.8", "link": "https://psb-academy.ru/education/309", "dateTags": [{"line1": "30 сентября 2026", "line2": "30 сентября 2026"}], "category": "personal", "image": defaultImage}],
+        "1-10-2026": [{"title": "ДПП ПК \"Банковское дело\"", "description": "Программа повышения квалификации по банковскому делу для специалистов финансовой сферы. Подробнее на сайте Академии ПСБ.", "rating": "4.8", "link": "https://psb-academy.ru/education", "dateTags": [{"line1": "1 октября 2026", "line2": "23 октября 2026"}], "category": "management", "image": defaultImage}],
+        "2-11-2026": [{"title": "ДПП ПК \"Анализ данных для начинающих\"", "description": "Программа предназначена для изучения методов моделирования процессов, способов визуализации данных и проведения тестирований. Подходит для специалистов, желающих систематизировать знания в области анализа и проектирования.", "rating": "4.8", "link": "https://psb-academy.ru/education/262", "dateTags": [{"line1": "2 ноября 2026", "line2": "10 декабря 2026"}], "category": "digital", "image": defaultImage}],
+        "3-8-2026": [{"title": "ДПП ПК \"Анализ данных для начинающих\"", "description": "Программа предназначена для изучения методов моделирования процессов, способов визуализации данных и проведения тестирований. Подходит для специалистов, желающих систематизировать знания в области анализа и проектирования.", "rating": "4.8", "link": "https://psb-academy.ru/education/262", "dateTags": [{"line1": "3 августа 2026", "line2": "3 сентября 2026"}], "category": "digital", "image": defaultImage}]
+    };
+
     let eventsDB = {};
     const storedEvents = localStorage.getItem('calendarEvents');
     if (storedEvents) {
@@ -90,23 +140,28 @@ document.addEventListener('DOMContentLoaded', () => {
         for (const k in raw) {
             eventsDB[k] = Array.isArray(raw[k]) ? raw[k] : [raw[k]];
         }
-    } else {
-        const t = new Date();
-        const todayKey = `${t.getDate()}-${t.getMonth()}-${t.getFullYear()}`;
-        const defaultImage = "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1000&auto=format&fit=crop";
-        eventsDB = {};
-        eventsDB[todayKey] = [{
-            title: "Гособоронзаказ. Эксперты",
-            image: defaultImage,
-            description: "Программа предназначена для обучения сотрудников, задействованных в гособоронзаказе (ГОЗ).",
-            rating: "4.8",
-            link: "#",
-            dateTags: [
-                { line1: "с 17 июня", line2: "до 27 июня" },
-                { line1: "с 9 сентября", line2: "до 19 сентября" }
-            ],
-            category: "goz"
-        }];
+    }
+    // Подсев: добавляем мероприятия по умолчанию (из Excel), обновляем описания
+    let changed = false;
+    for (const key in DEFAULT_EVENTS) {
+        const defaultArr = DEFAULT_EVENTS[key];
+        if (!eventsDB[key]) {
+            eventsDB[key] = defaultArr;
+            changed = true;
+        } else {
+            // Обновляем описания у существующих событий по совпадению title
+            const existingArr = eventsDB[key];
+            for (let i = 0; i < existingArr.length; i++) {
+                const def = defaultArr.find(d => d.title === existingArr[i].title);
+                if (def && def.description !== existingArr[i].description) {
+                    existingArr[i].description = def.description;
+                    if (def.link) existingArr[i].link = def.link;
+                    changed = true;
+                }
+            }
+        }
+    }
+    if (changed) {
         localStorage.setItem('calendarEvents', JSON.stringify(eventsDB));
     }
 
@@ -264,6 +319,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         updateEventCounter();
+
+        // Мобильное «нет мероприятий» (только на мобильном)
+        const mobileNoEvents = document.getElementById('mobileNoEvents');
+        if (mobileNoEvents) {
+            const hasAny = grid.querySelectorAll('.day-cell.has-event').length > 0;
+            const isMobile = window.innerWidth <= 768;
+            mobileNoEvents.style.display = (!hasAny && isMobile) ? 'block' : 'none';
+        }
+
+        // Мобильная полоска дат (1, 2, 3... 31)
+        const mobileDatesRow = document.getElementById('mobileDatesRow');
+        if (mobileDatesRow) {
+            mobileDatesRow.innerHTML = '';
+            for (let d = 1; d <= daysInMonth; d++) {
+                const span = document.createElement('span');
+                span.className = 'mobile-date-num';
+                if (d === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                    span.classList.add('today');
+                }
+                span.textContent = d;
+                span.dataset.day = String(d);
+                mobileDatesRow.appendChild(span);
+            }
+        }
     }
 
     // === РЕНДЕР СПИСКА ===
@@ -351,17 +430,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // Обновление данных из localStorage (когда админка сохраняет в другом iframe/вкладке)
     function refreshFromStorage() {
         const stored = localStorage.getItem('calendarEvents');
-        if (!stored) return;
-        const raw = JSON.parse(stored);
         eventsDB = {};
-        for (const k in raw) {
-            eventsDB[k] = Array.isArray(raw[k]) ? raw[k] : [raw[k]];
+        if (stored) {
+            const raw = JSON.parse(stored);
+            for (const k in raw) {
+                eventsDB[k] = Array.isArray(raw[k]) ? raw[k] : [raw[k]];
+            }
         }
         renderCurrentView();
     }
 
     window.addEventListener('storage', function(e) {
         if (e.key === 'calendarEvents') refreshFromStorage();
+    });
+
+    // Принудительное обновление при переключении на вкладку «Календарь» (app.html)
+    window.addEventListener('message', function(e) {
+        if (e.data === 'refreshCalendar') refreshFromStorage();
     });
 
     // Начальный рендер
@@ -522,6 +607,16 @@ document.addEventListener('DOMContentLoaded', () => {
         hoveredCell = null;
     });
 
+    // Клик по ячейке с событием — открыть модалку (весь блок кликабелен)
+    grid.addEventListener('click', (e) => {
+        const cell = e.target.closest('.day-cell.has-event');
+        if (!cell) return;
+        // Кнопка и ссылка обрабатываются сами
+        if (e.target.closest('.btn-details') || e.target.closest('.btn-signup')) return;
+        const btn = cell.querySelector('.btn-details');
+        if (btn) openEventModal(btn);
+    });
+
     // === УМНОЕ ПОЗИЦИОНИРОВАНИЕ МОДАЛКИ ===
     function fillModalWithEvent(eventData) {
         modalTitle.textContent = eventData.title;
@@ -576,40 +671,8 @@ document.addEventListener('DOMContentLoaded', () => {
             eventModal.style.display = 'block';
             eventModal.classList.remove('modal-animate-in');
 
-            // Вычисляем координаты
-            if (window.innerWidth > 768 && cell && cell.classList.contains('day-cell')) {
-                const rect = cell.getBoundingClientRect();
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-
-                const modalWidth = eventModal.offsetWidth;
-                const modalHeight = eventModal.offsetHeight;
-
-                const isRightSide = (rect.left + rect.width / 2) > (window.innerWidth / 2);
-                const isBottomSide = (rect.top + rect.height / 2) > (window.innerHeight / 2);
-
-                eventModal.style.top = ''; eventModal.style.left = '';
-
-                if (!isBottomSide && !isRightSide) {
-                    eventModal.style.top = (rect.top + scrollTop) + 'px';
-                    eventModal.style.left = (rect.left + scrollLeft) + 'px';
-                }
-                else if (!isBottomSide && isRightSide) {
-                    eventModal.style.top = (rect.top + scrollTop) + 'px';
-                    eventModal.style.left = (rect.right + scrollLeft - modalWidth) + 'px';
-                }
-                else if (isBottomSide && !isRightSide) {
-                    eventModal.style.top = (rect.bottom + scrollTop - modalHeight) + 'px';
-                    eventModal.style.left = (rect.left + scrollLeft) + 'px';
-                }
-                else if (isBottomSide && isRightSide) {
-                    eventModal.style.top = (rect.bottom + scrollTop - modalHeight) + 'px';
-                    eventModal.style.left = (rect.right + scrollLeft - modalWidth) + 'px';
-                }
-            } else {
-                eventModal.style.top = ''; eventModal.style.left = '';
-            }
-
+            eventModal.style.top = '';
+            eventModal.style.left = '';
             eventModal.style.visibility = 'visible';
             // Анимация появления
             requestAnimationFrame(() => eventModal.classList.add('modal-animate-in'));
@@ -691,7 +754,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // === ЗАКРЫТИЕ ПО ESCAPE ===
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            if (accessModal.style.display === 'flex') {
+            const mm = document.getElementById('mobileMenu');
+            if (mm && mm.classList.contains('open')) {
+                mm.classList.remove('open');
+                document.body.style.overflow = '';
+            } else if (accessModal.style.display === 'flex') {
                 accessModal.style.display = 'none';
                 document.body.style.overflow = 'auto';
             } else if (eventModal.style.display === 'block') {
@@ -704,6 +771,37 @@ document.addEventListener('DOMContentLoaded', () => {
     btnEye.addEventListener('click', () => { accessModal.style.display = 'flex'; document.body.style.overflow = 'hidden'; });
     closeAccessBtn.addEventListener('click', () => { accessModal.style.display = 'none'; document.body.style.overflow = 'auto'; });
     accessModal.addEventListener('click', (e) => { if (e.target === accessModal) { accessModal.style.display = 'none'; document.body.style.overflow = 'auto'; } });
+
+    // Мобильное меню (бургер)
+    const btnBurger = document.getElementById('btnBurger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
+    if (btnBurger && mobileMenu) {
+        btnBurger.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            document.body.style.overflowX = 'hidden';
+        });
+        const closeMobileMenu = () => {
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
+            document.body.style.overflowX = '';
+        };
+        mobileMenuClose && mobileMenuClose.addEventListener('click', closeMobileMenu);
+        mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) closeMobileMenu(); });
+    }
+    document.querySelectorAll('.mobile-menu-link[data-toggle]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.closest('.mobile-menu-item');
+            item && item.classList.toggle('open');
+        });
+    });
+    document.querySelectorAll('.mobile-menu-sublink').forEach(link => {
+        link.addEventListener('click', () => {
+            const menu = document.getElementById('mobileMenu');
+            if (menu) { menu.classList.remove('open'); document.body.style.overflow = ''; document.body.style.overflowX = ''; }
+        });
+    });
 
     // Шрифт: Стандартный / Специальный
     fontRadios.forEach(radio => {
