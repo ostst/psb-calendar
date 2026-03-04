@@ -47,6 +47,7 @@ body {
 }
 
 /* ================= HEADER (точный клон psb-academy.ru из реальных CSS) ================= */
+.nav-item-projects-hidden { display: none !important; }
 .header {
     opacity: 1;
     z-index: 500;
@@ -453,8 +454,10 @@ body { padding-top: 78px; }
 .filter-tabs {
     display: flex;
     gap: 10px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     padding: 16px 0 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 .filter-tab {
     background: var(--card-bg);
