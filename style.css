@@ -577,12 +577,11 @@ body { padding-top: 78px; }
 /* Теги дат */
 .date-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
 .tag {
-    background: #F2F3F5; color: #666; 
+    background: #F2F3F5; color: #666;
     padding: 10px 15px; border-radius: 8px; font-size: 13px; text-align: center;
-    display: flex; flex-direction: column; line-height: 1.3;
+    white-space: nowrap; line-height: 1.3;
     cursor: pointer; border: 1px solid transparent; transition: 0.2s;
 }
-.tag span:first-child { font-weight: 600; font-size: 14px; }
 .tag.active { background: var(--primary-orange); color: white; }
 .tag:hover:not(.active) { background: #E0E0E0; }
 
